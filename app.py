@@ -597,8 +597,7 @@ def ad_request_detail(ad_request_id):
     return render_template('ad_request_detail.html', ad_request=ad_request)
 
 
-
+with app.app_context():
+    db.create_all()
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
