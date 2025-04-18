@@ -6,6 +6,7 @@ import io
 import matplotlib
 matplotlib.use("Agg")  # Set the backend to "Agg"
 import matplotlib.pyplot as plt  # Now you can import pyplot
+import os 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'm1n0r_pr0ject'
