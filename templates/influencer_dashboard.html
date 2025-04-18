@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Apply an orange background to the entire page */
+        body {
+            background-color: #fff; /* White background for content */
+            color: #333; /* Dark text color for contrast */
+            padding: 20px; /* Padding around the content */
+        }
+
+        /* Style for the container to improve readability */
+        .container {
+            background-color: #FFA500; /* Orange background */
+            border-radius: 10px; /* Rounded corners for content box */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            padding: 30px;
+        }
+
+        /* Heading styles */
+        h1, h2 {
+            color: #333; /* Dark color for headings */
+            font-weight: bold;
+        }
+
+        /* List group item styles */
+        .list-group-item {
+            background-color: #f8f9fa; /* Light background for list items */
+            border: 1px solid #ddd; /* Border for list items */
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        /* Styling for the 'Send Ad Request' button */
+        .btn-sm {
+            margin-left: 10px;
+        }
+
+        /* Styling for the links inside the button */
+        .btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Influencer Dashboard</h1>
+        <h3><a href="{{ url_for('influencer_summary')}}">click to Track ad_request status</a></h3>
+        <h2>Available Campaigns</h2>
+        <ul class="list-group mb-4">
+            {% for campaign in campaigns %}
+            <li class="list-group-item">
+                <p><strong>{{ campaign.name }}</strong></p>
+                <p><strong>sponsor : </strong>{{campaign.sponsor.username}}</p>
+                <p><strong>description : </strong>{{ campaign.description }}</p>
+                <!-- Button to navigate to ad request form -->
+                <button class="btn btn-primary btn-sm float-right">
+                    <a href="{{ url_for('send_ad_request', campaign_id=campaign.id) }}" class="text-white">Send Ad Request</a>
+                </button>
+
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>My Ad Requests</h2>
+        <ul class="list-group mb-4">
+            {% for ad_request in ad_requests %}
+            <li class="list-group-item">
+                <strong>Campaign: {{ ad_request.campaign.name }}</strong><br>
+                <strong>Status:</strong> {{ ad_request.status }}<br>
+                <strong>Sponsor:</strong> {{ ad_request.campaign.sponsor.username }}<br>
+                <p><strong>Payment Amount:</strong> {{ ad_request.payment_amount }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('logout') }}" class="btn btn-danger mt-4">Logout</a>
+    </div>
+
+    <!-- Include necessary scripts for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

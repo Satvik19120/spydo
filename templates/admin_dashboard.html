@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Apply an orange background to the entire page */
+        body {
+            background-color: #fff; /* Orange background */
+            color: #333; /* Dark text color for contrast */
+            padding: 20px; /* Padding around the content */
+        }
+
+        /* Style for the container to improve readability */
+        .container {
+            background-color: #b37db9; /* White light green for content */
+            border-radius: 10px; /* Rounded corners for content box */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            padding: 30px;
+        }
+
+        /* Heading styles */
+        h1, h2 {
+            color: #333; /* Dark color for headings */
+            font-weight: bold;
+        }
+
+        /* Table styling */
+        .table1{
+            width: 50%;
+            margin-top: 20px;
+        }
+
+        .table {
+            width: 80% ;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* List item styling */
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Button styling */
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        /* Additional styling for logout button */
+        .btn-danger {
+            margin-top: 20px;
+        }
+
+        
+        /* Navbar styling */
+        .navbar {
+            background-color: #b37db9; /* grey background for navbar */
+            margin-left:4.6%;
+            margin-right:4.6%;
+        }
+
+        .navbar a {
+            color: rgb(16, 1, 1); /* black text for navbar items */
+        }
+
+        .navbar a:hover {
+            color: #3b0df3; /* blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Home</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('view_users') }}">Manage Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-5">
+        <h1 class="my-4">Summary Pannel</h1>
+        <p>Total Users: {{ total_users }}</p>
+        <p>Total Campaigns: {{ total_campaigns }}</p>
+        <p>Total Ad Requests: {{ total_ad_requests }}</p>
+
+        <!-- Display Flagged Users -->
+         <br>
+        <h2>Flagged user</h2>
+        <table class="table1 table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                {%if user.is_blocked%}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.role }}</td>
+                    </tr>
+                {%endif%}
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Display Users with Block/Unblock Actions -->
+         <br><br>
+        <h2>Manage Users</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ 'Blocked' if user.is_blocked else 'Active' }}</td>
+                        <td>
+                            {% if user.is_blocked %}
+                                <form action="{{ url_for('unblock_user', user_id=user.id) }}" method="POST">
+                                    <button type="submit" class="btn btn-success">Unblock</button>
+                                </form>
+                            {% else %}
+                                <form action="{{ url_for('block_user', user_id=user.id) }}" method="POST">
+                                    <button type="submit" class="btn btn-danger">Block</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

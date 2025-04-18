@@ -1,0 +1,181 @@
+<!-- templates/ad_request_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Request Detail</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            background: #6a11cb;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            padding-top: 50px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        hr {
+            border-top: 1px solid #fff;
+        }
+
+        /* Card Styling */
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background: #fff;
+            color: #333;
+        }
+
+        .card-header {
+            background: #0a0f15;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.4rem;
+        }
+
+        .card-body {
+            background-color: #f9f9f9;
+            border-radius: 0 0 15px 15px;
+            padding: 25px;
+        }
+
+        .card-body p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .text-info {
+            color: #0177ff;
+            font-weight: 600;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+
+        .badge-info {
+            background-color: #17a2b8;
+        }
+
+        /* Buttons */
+        .btn-secondary {
+            background-color: #f05f40;
+            border-color: #f05f40;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d04a33;
+            border-color: #d04a33;
+        }
+
+        .btn {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            font-size: 1.2rem;
+            margin-top: 25px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: #007bff;
+            color: #fff;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        .footer a {
+            color: #f05f40;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Page header -->
+<div class="container">
+    <h2>Ad Request Details</h2>
+    <hr>
+
+    <!-- Ad request details card -->
+    <div class="card">
+        <div class="card-header">
+            <h4> &nbsp; &nbsp;{{ ad_request.customer.username }} requested for {{ ad_request.campaign.name }}</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Campaign Name:</strong> <span class="text-muted" ><strong>{{ ad_request.campaign.name }}</strong></span></p>
+            <p><strong>Influencer:</strong> <span class="text-muted">{{ ad_request.customer.username }}</span></p>
+            <p><strong>Message:</strong> <span class="text-muted">{{ ad_request.messages or 'No message provided' }}</span></p>
+            <p><strong>Requirements:</strong> <span class="text-muted">{{ ad_request.requirements or 'No specific requirements' }}</span></p>
+            <p><strong>Payment Amount:</strong> <span class="text-success">${{ ad_request.payment_amount }}</span></p>
+            <p><strong>Status:</strong> <span class="text-success">{{ ad_request.status }}</span></p>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="{{ url_for('sponsor_dashboard') }}" class="back-btn">Click to Return</a>
+</div>
+
+<!-- Footer
+<div class="footer">
+    <p>&copy; 2024 Your Company. All Rights Reserved. <a href="#">Privacy Policy</a></p>
+</div> -->
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

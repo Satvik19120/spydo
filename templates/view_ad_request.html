@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Ad Requests</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Ad Requests for Campaign: {{ campaign.name }}</h1>
+
+        {% if ad_requests %}
+            <ul class="list-group">
+                {% for ad_request in ad_requests %}
+                    <li class="list-group-item">
+                        <strong>Influencer:</strong> {{ ad_request.customer.username }}
+                        <br>
+                        <strong>Status:</strong> {{ ad_request.status }}
+                        <br>
+                        <strong>Message:</strong> {{ ad_request.messages }}
+                        <br>
+                        <strong>Requirements:</strong> {{ ad_request.requirements }}
+                        <br>
+                        <strong>Payment Amount:</strong> ${{ ad_request.payment_amount }}
+                        <br>
+                        <a href="{{ url_for('view_influencer_profile', influencer_id=ad_request.customer.id) }}" class="btn btn-info btn-sm">View Influencer Profile</a>
+
+                        <!-- Accept and Reject buttons -->
+                        <a href="{{ url_for('accept_ad_request', ad_request_id=ad_request.id) }}" class="btn btn-success btn-sm float-right ml-2">Accept</a>
+                        <a href="{{ url_for('reject_ad_request', ad_request_id=ad_request.id) }}" class="btn btn-danger btn-sm float-right">Reject</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No ad requests yet.</p>
+        {% endif %}
+        
+        <a href="{{ url_for('sponsor_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+</body>
+</html>

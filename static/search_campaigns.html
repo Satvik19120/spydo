@@ -1,0 +1,54 @@
+<!-- search_campaigns.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Campaigns</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Search Campaigns</h2>
+        
+        <!-- Search Form -->
+        <form method="POST" action="{{ url_for('search_campaigns') }}">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Enter campaign name or goal" value="{{ request.form.get('search', '') }}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </form>
+
+        <hr>
+
+        <!-- Display Search Results -->
+        {% if campaigns %}
+            <h4>Search Results</h4>
+            <div class="list-group">
+                {% for campaign in campaigns %}
+                    <div class="list-group-item">
+                        <h5>{{ campaign.name }}</h5>
+                        <p><strong>Goal:</strong> {{ campaign.goals }}</p>
+                        <p><strong>Budget:</strong> ${{ campaign.budget }}</p>
+                        <p><strong>Start Date:</strong> {{ campaign.start_date }} <strong>End Date:</strong> {{ campaign.end_date }}</p>
+                        <p><strong>Description:</strong> {{ campaign.description }}</p>
+                        <p><strong>Visibility:</strong> {{ campaign.visibility }}</p>
+                        <hr>
+                        <!-- Link to apply for the campaign -->
+                        <a href="{{ url_for('apply_campaign', campaign_id=campaign.id) }}" class="btn btn-success">Apply for Campaign</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                No campaigns found based on your search criteria.
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

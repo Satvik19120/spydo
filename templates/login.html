@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Outer background color */
+        body {
+            background-color: #f0f0f0; /* Light background for the whole page */
+            margin: 0;
+            height: 100vh; /* Ensure the body takes up full viewport height */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        /* Content Box Style */
+        .content-box {
+            display: flex; /* Flexbox layout for left content (form) and right image */
+            background-color: #ff6f00; /* Blue background for the content box */
+            color: #fff; /* White text color for contrast */
+            padding: 30px;
+            border-radius: 20px; /* Rounded corners for the content box */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            width: 100%;
+            max-width: 900px; /* Set max width for the content box */
+            margin-left: 10%;
+        }
+
+        /* Left Form Styling */
+        .content-box .form-container {
+            flex: 1; /* Form takes up 50% of the box */
+            padding-right: 20px; /* Space between form and image */
+        }
+
+        /* Title Styling */
+        .content-box h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Form Controls */
+        .form-group label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-group input {
+            border-radius: 5px; /* Rounded corners for the inputs */
+        }
+
+        /* Button Styling */
+        .btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .btn-success {
+            background-color: #28a745; /* Green color for login button */
+            border-color: #218838;
+        }
+
+        .btn-primary {
+            background-color: #0056b3; /* Dark blue for register button */
+            border-color: #004085;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Grey for return home button */
+            border-color: #5a6268;
+        }
+
+        /* Right Image Styling */
+        .content-box .image-container {
+            flex: 1; /* Image takes up 50% of the box */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-box .image-container img {
+            max-width: 100%; /* Ensure the image scales properly */
+            height: auto;
+            border-radius: 10px; /* Optional: rounded corners for the image */
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content Box centered -->
+    <div class="container">
+        <div class="content-box">
+            <!-- Form Container (Left Side) -->
+            <div class="form-container">
+                <h1>Login</h1>
+                <!-- Display Flash Messages -->
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('login') }}" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">Click to register</a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Return to Home</a>
+                </form>
+            </div>
+
+            <!-- Image Container (Right Side) -->
+            <div class="image-container">
+                <!-- Replace with your image URL -->
+                <img src="static/base2a.jpg" alt="Login Image">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Outer background color */
+        body {
+            background-color: #e0e0e0; /* Background color for the entire page */
+            margin: 0;
+            height: 100vh; /* Ensure the body takes up full viewport height */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        /* Content Box Style */
+        .content-box {
+            display: flex; /* Flexbox layout for the image and content */
+            background-color: #00ff62; /* Blue background for the content box */
+            color: #fff; /* White text color for contrast */
+            padding: 30px;
+            border-radius: 20px; /* Rounded corners for the content box */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            width: 80%; /* Box width */
+            max-width: 900px; /* Max width to ensure it doesn't stretch too wide */
+            height: 450px; /* Height of the content box */
+            margin-left: 10%; /* Shift the box to the right */
+        }
+
+        /* Left Image Style */
+        .content-box .image {
+            flex: 2; /* Increase the flex value to make the image take more space */
+            max-width: 60%; /* Make image width flexible but not more than 60% */
+            padding-right: 10px;
+        }
+
+        /* Right Content Style */
+        .content-box .content {
+            flex: 1; /* Reduce the content's flex value to take less space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-box .content h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold; /* Make the title bold */
+            color: #fff; /* White text color */
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn-container a {
+            margin-right: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #0056b3; /* Darker blue for the sign-in button */
+            border-color: #004085; /* Slightly darker border for the button */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Grey color for the sign-up button */
+            border-color: #5a6268; /* Slightly darker grey border */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Content Box centered -->
+    <div class="container">
+        <div class="content-box">
+            <div class="image">
+                <!-- Replace with your actual image URL -->
+                <img src="static\spydo.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="content">
+                <h1 style="color:red">Welcome to the spydo</h1>
+                <h3 style="color:red">influencer and sponsor</h3>
+                <h3 style="color:red">coordination platerform</h3>
+                <div class="btn-container">
+                    <a href="{{ url_for('login') }}" class="btn btn-primary">Sign-In</a>
+                    <a href="{{ url_for('register') }}" class="btn btn-secondary">Sign-Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

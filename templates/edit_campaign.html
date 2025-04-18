@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Campaign</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Set page background color */
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Set content box background color and padding */
+        .content-box {
+            background-color:#6a11cb;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Optional: Add some margin to the header */
+        .content-box h1 {
+            text-align: center;
+            color: white;
+        }
+
+        /* Adjust form elements inside the content box */
+        .content-box .form-group label {
+            color: white;
+        }
+
+        .content-box .form-control {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <br><br><br><br>
+        <h1 class="my-4">Edit Campaign</h1>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Campaign Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ campaign.name }}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" required>{{ campaign.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="start_date">Start Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" value="{{ campaign.start_date }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="end_date">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" value="{{ campaign.end_date }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                <input type="number" class="form-control" id="budget" name="budget" step="0.01" value="{{ campaign.budget }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="goals">Campaign Goals</label>
+                <textarea class="form-control" id="goals" name="goals" required>{{ campaign.goals }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+
+        <a href="{{ url_for('sponsor_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
